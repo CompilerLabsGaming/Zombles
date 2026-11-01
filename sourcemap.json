@@ -1,0 +1,145 @@
+{
+  "name": "game",
+  "className": "DataModel",
+  "children": [
+    {
+      "name": "ServerScriptService",
+      "className": "ServerScriptService",
+      "pluginManaged": true,
+      "children": [
+        {
+          "name": "PlayerStats",
+          "className": "Script",
+          "pluginManaged": true,
+          "filePaths": [
+            "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/PlayerStats.legacy.luau"
+          ]
+        },
+        {
+          "name": "GameCore",
+          "className": "Folder",
+          "pluginManaged": true,
+          "children": [
+            {
+              "name": "Scripting",
+              "className": "Folder",
+              "pluginManaged": true,
+              "children": [
+                {
+                  "name": "Application",
+                  "className": "Script",
+                  "pluginManaged": true,
+                  "filePaths": [
+                    "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Application.legacy.luau"
+                  ]
+                },
+                {
+                  "name": "Game",
+                  "className": "Script",
+                  "pluginManaged": true,
+                  "filePaths": [
+                    "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Game.legacy.luau"
+                  ]
+                },
+                {
+                  "name": "Libraries",
+                  "className": "Folder",
+                  "pluginManaged": true,
+                  "children": [
+                    {
+                      "name": "Strings",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/Strings.luau"
+                      ]
+                    },
+                    {
+                      "name": "ZombieConfiguration",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/ZombieConfiguration.luau"
+                      ]
+                    },
+                    {
+                      "name": "Players",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/Players.luau"
+                      ]
+                    },
+                    {
+                      "name": "PlaySounds",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/PlaySounds.luau"
+                      ]
+                    },
+                    {
+                      "name": "LaserGun",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/LaserGun.luau"
+                      ]
+                    },
+                    {
+                      "name": "SpawningGameObjects",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/SpawningGameObjects.luau"
+                      ]
+                    },
+                    {
+                      "name": "GivePlayer",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/GivePlayer.luau"
+                      ]
+                    },
+                    {
+                      "name": "BuilderLibrary",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/BuilderLibrary.luau"
+                      ]
+                    },
+                    {
+                      "name": "GameInstanceModule",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/Libraries/GameInstanceModule.luau"
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "States",
+                  "className": "Folder",
+                  "pluginManaged": true,
+                  "children": [
+                    {
+                      "name": "GameStates",
+                      "className": "ModuleScript",
+                      "pluginManaged": true,
+                      "filePaths": [
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Scripting/States/GameStates.luau"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
