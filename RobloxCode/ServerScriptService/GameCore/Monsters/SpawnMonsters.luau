@@ -1,14 +1,12 @@
+--[[
+	Spawn Monsters
+]]
+
+-- module
 local module = {}
 
 --[[
-	File Scoped Values
-]]
-
--- modules and data
-
-
---[[
-	Spawn Zombies and Spawners
+	Spawn Zombies
 ]]
 
 -- calculate position from spawner

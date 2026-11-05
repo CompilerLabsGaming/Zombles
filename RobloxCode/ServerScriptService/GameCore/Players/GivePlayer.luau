@@ -6,8 +6,8 @@ local module = {}
 
 -- module constants
 local replicated_storage = game:WaitForChild("ReplicatedStorage")
-local server_script_service = game:WaitForChild("ServerScriptService")
-local players_module = require(server_script_service.GameCore.Scripting.Libraries.Players)
+local ServerScriptService = game:WaitForChild("ServerScriptService")
+local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
 local players_service = game:GetService("Players")
 
 --[[
@@ -28,7 +28,7 @@ end
 -- give all players starting tools
 function module.GIVE__all_players_tool(tool)
 	-- get all player names
-	local player_names = players_module.get_all_player_names()
+	local player_names = PlayersModule.get_all_player_names()
 
 	-- for each player
 	for i, player_name in pairs(player_names) do

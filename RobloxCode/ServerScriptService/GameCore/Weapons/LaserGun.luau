@@ -54,7 +54,7 @@ export type GunConfiguration = {
 
 -- gun configuration scripts
 Module.BuildScripts = {}
-function Module.BuildScripts.Pack_GunPart(partName: string, partShape: Enum.PartType, material: Enum.Material, positionalOffset: Vector3, rotation: Vector3, size: Vector3, color: Color3): GunPartAppearance
+function Module.BuildScripts.Pack_GunPart(partName: string, partShape: Enum.PartType, material: Enum.Material, positionalOffset: Vector3, rotation: Vector3, size: Vector3, color: Color3): GunPart
 	local output: GunPart = nil
 	
 	-- setup values

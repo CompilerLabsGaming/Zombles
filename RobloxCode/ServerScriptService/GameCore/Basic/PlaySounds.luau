@@ -1,6 +1,6 @@
 local Module = {}
 
--- sound_IDs
+-- SoundIDs
 Module.SoundIDs = {
 	default = "5279459236",
 	pew = "5958405572",
@@ -33,7 +33,7 @@ export type LoadedSound = {
 -- load all sounds
 function Module.LOAD__sounds()
 	-- load sounds
-	for name, asset_ID in pairs(Module.sound_IDs) do
+	for name, asset_ID in pairs(Module.SoundIDs) do
 		-- create sound variable
 		local sound: LoadedSound = {}
 
@@ -53,16 +53,16 @@ end
 -- get sound asset id
 function Module.GET__sound_asset_ID(searching_for: string): string
 	-- search for sound
-	for name: string, member: string in pairs(Module.sound_IDs) do
+	for name: string, member: string in pairs(Module.SoundIDs) do
 		-- check for name
 		if name == searching_for then
 			-- match
-			return Module.CALCULATE__sound_asset_ID_string(Module.sound_IDs[name])
+			return Module.CALCULATE__sound_asset_ID_string(Module.SoundIDs[name])
 		end
 	end
 
 	-- sound not found
-	return Module.CALCULATE__sound_asset_ID_string(Module.sound_IDs["default"])
+	return Module.CALCULATE__sound_asset_ID_string(Module.SoundIDs["default"])
 end
 
 -- play any sound
