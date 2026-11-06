@@ -1,9 +1,9 @@
-local module = {}
+local Module = {}
 
 -- string search in list
-function module.list_has_string(list, searching_for)
+function Module.ListHasString(list, searchingFor)
 	for name, value in ipairs(list) do
-		if type(value) == "string" and value == searching_for then
+		if type(value) == "string" and value == searchingFor then
 			return true
 		end
 	end
@@ -11,4 +11,4 @@ function module.list_has_string(list, searching_for)
 	return false
 end
 
-return module
+return Module

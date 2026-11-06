@@ -47,7 +47,7 @@ function RoundManager.EndGame()
 end
 
 function RoundManager.GetCurrentZombieType(): string
-    return "noob"
+    return "Ash"
 end
 
 return RoundManager

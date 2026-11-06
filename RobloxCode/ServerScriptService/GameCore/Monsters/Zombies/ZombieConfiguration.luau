@@ -1,191 +1,191 @@
-local module = {}
+local Module = {}
 
 --[[
 	Zombie Configuration Data
 ]]
 
 -- generate colors
-module.zombie_colors = {
-	normal_brown = Color3.fromRGB(106, 57, 9),
-	ash_brown = Color3.fromRGB(107, 63, 25),
-	baby_blue = Color3.fromRGB(152, 194, 219),
-	light_blue = Color3.fromRGB(59, 226, 244),
-	dark_blue = Color3.fromRGB(6, 10, 254),
-	medium_green = Color3.fromRGB(58, 125, 21),
-	bright_green = Color3.fromRGB(0, 255, 0),
-	magenta = Color3.fromRGB(227, 37, 244),
-	ash_skin = Color3.fromRGB(52, 46, 31),
-	dark_black = Color3.fromRGB(0, 0, 0),
-	silver = Color3.fromRGB(200, 200, 200),
-	noob_yellow = Color3.fromRGB(255, 255, 0),
-	noob_green = Color3.fromRGB(0, 161, 0),
-	noob_blue = Color3.fromRGB(0, 0, 255),
-	frost_white = Color3.fromRGB(242, 243, 243)
+Module.ZombieColors = {
+	Normalbrown = Color3.fromRGB(106, 57, 9),
+	AshBrown = Color3.fromRGB(107, 63, 25),
+	BabyBlue = Color3.fromRGB(152, 194, 219),
+	LightBlue = Color3.fromRGB(59, 226, 244),
+	DarkBlue = Color3.fromRGB(6, 10, 254),
+	MediumGreen = Color3.fromRGB(58, 125, 21),
+	BrightGreen = Color3.fromRGB(0, 255, 0),
+	Magenta = Color3.fromRGB(227, 37, 244),
+	AshSkin = Color3.fromRGB(52, 46, 31),
+	DarkBlack = Color3.fromRGB(0, 0, 0),
+	Silver = Color3.fromRGB(200, 200, 200),
+	NoobYellow = Color3.fromRGB(255, 255, 0),
+	NoobGreen = Color3.fromRGB(0, 161, 0),
+	NoobBlue = Color3.fromRGB(0, 0, 255),
+	FrostWhite = Color3.fromRGB(242, 243, 243)
 }
 
 -- generate faces
-module.zombie_faces = {
-	normal = "rbxassetid://7157327144",
-	rainbow = "rbxassetid://3361955796",
-	squidward = "rbxassetid://26487044"
+Module.ZombieFaces = {
+	Normal = "rbxassetid://7157327144",
+	Rainbow = "rbxassetid://3361955796",
+	Squidward = "rbxassetid://26487044"
 }
 
 -- generate styles
-module.zombie_styles = {
-	-- normal zombie
-	normal = {
-		display_name = "Zombie",
-		colors = {
-			skin = module.zombie_colors.medium_green,
-			pants = module.zombie_colors.normal_brown,
-			shirt = module.zombie_colors.normal_brown
+Module.ZombieStyles = {
+	-- Normal zombie
+	Normal = {
+		DisplayName = "Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.MediumGreen,
+			Pants = Module.ZombieColors.Normalbrown,
+			Shirt = Module.ZombieColors.Normalbrown
 		},
-		face = module.zombie_faces.normal,
-		decoration = {},
-		max_health = 100,
-		damage = {
-			dealt = 4,
-			rate = 1
+		Face = Module.ZombieFaces.Normal,
+		Decoration = {},
+		MaxHealth = 100,
+		Damage = {
+			Dealt = 4,
+			Rate = 1
 		},
-		worth = 1
+		Worth = 1
 	},
 	
 	-- noob zombie
-	noob = {
-		display_name = "Noob Zombie",
-		colors = {
-			skin = module.zombie_colors.noob_yellow,
-			pants = module.zombie_colors.noob_green,
-			shirt = module.zombie_colors.dark_blue,
+	Noob = {
+		DisplayName = "Noob Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.NoobYellow,
+			Pants = Module.ZombieColors.NoobGreen,
+			Shirt = Module.ZombieColors.NoobBlue,
 		},
-		face = module.zombie_faces.rainbow,
-		decoration = {},
-		max_health = 10,
-		damage = {
-			dealt = 1,
-			rate = 5
+		Face = Module.ZombieFaces.Rainbow,
+		Decoration = {},
+		MaxHealth = 10,
+		Damage = {
+			Dealt = 1,
+			Rate = 5
 		},
-		worth = 1
+		Worth = 1
 	},
 
 	-- ash zombie
-	ash = {
-		display_name = "Ash Zombie",
-		colors = {
-			skin = module.zombie_colors.ash_skin,
-			pants = module.zombie_colors.ash_brown,
-			shirt = module.zombie_colors.ash_brown
+	Ash = {
+		DisplayName = "Ash Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.AshSkin,
+			Pants = Module.ZombieColors.AshBrown,
+			Shirt = Module.ZombieColors.AshBrown
 		},
-		face = module.zombie_faces.normal,
-		decoration = {
-			"fire"
+		Face = Module.ZombieFaces.Normal,
+		Decoration = {
+			"Fire"
 		},
-		max_health = 200,
-		damage = {
-			dealt = 4,
-			rate = 1
+		MaxHealth = 200,
+		Damage = {
+			Dealt = 4,
+			Rate = 1
 		},
-		worth = 3
+		Worth = 3
 	},
 
 	-- ice zombie
-	ice = {
-		display_name = "Ice Zombie",
-		colors = {
-			skin = module.zombie_colors.light_blue,
-			pants = module.zombie_colors.dark_blue,
-			shirt = module.zombie_colors.dark_blue
+	Ice = {
+		DisplayName = "Ice Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.LightBlue,
+			Pants = Module.ZombieColors.DarkBlue,
+			Shirt = Module.ZombieColors.DarkBlue
 		},
-		face = module.zombie_faces.normal,
-		decoration = {},
-		max_health = 200,
-		damage = {
-			dealt = 7,
-			rate = 1
+		Face = Module.ZombieFaces.Normal,
+		Decoration = {},
+		MaxHealth = 200,
+		Damage = {
+			Dealt = 7,
+			Rate = 1
 		},
-		worth = 3
+		Worth = 3
 	},
 	
 	-- frost zombie
-	frost = {
-		display_name = "Frost Zombie",
-		colors = {
-			skin = module.zombie_colors.frost_white,
-			pants = module.zombie_colors.frost_white,
-			shirt = module.zombie_colors.frost_white
+	Frost = {
+		DisplayName = "Frost Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.FrostWhite,
+			Pants = Module.ZombieColors.FrostWhite,
+			Shirt = Module.ZombieColors.FrostWhite
 		},
-		face = module.zombie_faces.normal,
-		decoration = {},
-		max_health = 200,
-		damage = {
-			dealt = 7,
-			rate = 1
+		Face = Module.ZombieFaces.Normal,
+		Decoration = {},
+		MaxHealth = 200,
+		Damage = {
+			Dealt = 7,
+			Rate = 1
 		},
-		worth = 5
+		Worth = 5
 	},
 
 	-- radiated zombie
-	radiated = {
-		display_name = "Radiated Zombie",
-		colors = {
-			skin = module.zombie_colors.bright_green,
-			pants = module.zombie_colors.silver,
-			shirt = module.zombie_colors.silver
+	Radiated = {
+		DisplayName = "Radiated Zombie",
+		Colors = {
+			Skin = Module.ZombieColors.BrightGreen,
+			Pants = Module.ZombieColors.Silver,
+			Shirt = Module.ZombieColors.Silver
 		},
-		face = module.zombie_faces.normal,
-		decoration = {},
-		max_health = 300,
-		damage = {
-			dealt = 10,
-			rate = 1
+		Face = Module.ZombieFaces.Normal,
+		Decoration = {},
+		MaxHealth = 300,
+		Damage = {
+			Dealt = 10,
+			Rate = 1
 		},
-		worth = 5
+		Worth = 5
 	},
 	
-	-- squidward zombie
-	squidward = {
-		display_name = "Zombward",
-		colors = {
-			skin = module.zombie_colors.baby_blue,
-			pants = module.zombie_colors.baby_blue,
-			shirt = module.zombie_colors.ash_brown
+	-- Squidward zombie
+	Squidward = {
+		DisplayName = "Zombward",
+		Colors = {
+			Skin = Module.ZombieColors.BabyBlue,
+			Pants = Module.ZombieColors.BabyBlue,
+			Shirt = Module.ZombieColors.AshBrown
 		},
-		face = module.zombie_faces.squidward,
-		decoration = {},
-		max_health = 100,
-		damage = {
-			dealt = 5,
-			rate = 2
+		Face = Module.ZombieFaces.Squidward,
+		Decoration = {},
+		MaxHealth = 100,
+		Damage = {
+			Dealt = 5,
+			Rate = 2
 		},
-		worth = 5
+		Worth = 5
 	},
 	
 	-- jeff zombie
-	jeff = {
-		display_name = "Jeff",
-		colors = {
-			skin = module.zombie_colors.magenta,
-			pants = module.zombie_colors.magenta,
-			shirt = module.zombie_colors.magenta
+	Jeff = {
+		DisplayName = "Jeff",
+		Colors = {
+			Skin = Module.ZombieColors.Magenta,
+			Pants = Module.ZombieColors.Magenta,
+			Shirt = Module.ZombieColors.Magenta
 		},
-		face = module.zombie_faces.rainbow,
-		decoration = {},
-		max_health = 100000,
-		damage = {
-			dealt = 0,
-			rate = 10
+		Face = Module.ZombieFaces.Rainbow,
+		Decoration = {},
+		MaxHealth = 100000,
+		Damage = {
+			Dealt = 0,
+			Rate = 10
 		},
-		worth = 1000
+		Worth = 1000
 	}
 }
 
 -- get a list of all possible zombie types
-function module.get_zombie_types_list()
+function Module.GetAllPossibleZombieTypes()
 	-- setup output
 	local output = {}
 	
 	-- for each member
-	for name, member in pairs(module.zombie_styles) do
+	for name, member in pairs(Module.ZombieStyles) do
 		-- add name
 		table.insert(output, name)
 	end
@@ -193,4 +193,4 @@ function module.get_zombie_types_list()
 	return output
 end
 
-return module
+return Module

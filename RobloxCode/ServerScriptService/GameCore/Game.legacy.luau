@@ -8,6 +8,7 @@
 
 local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
+local SoundModule = require(ServerScriptService.GameCore.Basic.PlaySounds)
 local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
 local GivePlayerModule = require(ServerScriptService.GameCore.Players.GivePlayer)
 local SpawningModule = require(ServerScriptService.GameCore.Monsters.SpawnMonsters)
@@ -82,6 +83,9 @@ end
 
 -- run game
 local function RunGame()
+	-- load all sounds
+	SoundModule.LoadAllSounds()
+
 	-- setup damage remote events
 	ReplicatedStorage.GameCore.RemoteEvents.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
 		-- do damage

@@ -7,110 +7,110 @@
 ]]
 
 -- last attack
-local last_prickle = 0
+local LastPrickle = 0
 
 -- modules
-local sound_module = require(game:WaitForChild("ServerScriptService").GameCore.Basic.PlaySounds)
-local player_module = require(game:WaitForChild("ServerScriptService").GameCore.Players.Players)
+local SoundModule = require(game:WaitForChild("ServerScriptService").GameCore.Basic.PlaySounds)
+local PlayerModule = require(game:WaitForChild("ServerScriptService").GameCore.Players.Players)
 
 --[[
 	Wrapper Functions
 ]]
 
-local function GET__scripting_folder()
+local function GetScriptingFolder()
 	return script.Parent.Parent
 end
 
-local function GET__model()
+local function GetModel()
 	return script.Parent.Parent.Parent
 end
 
-local function GET__activated()
-	return GET__scripting_folder().Values.Activated.Value
+local function IsZombieActivated()
+	return GetScriptingFolder().Values.Activated.Value
 end
 
-local function GET__left_arm()
-	return GET__model().LeftArm
+local function GetLeftArm()
+	return GetModel().LeftArm
 end
 
-local function GET__right_arm()
-	return GET__model().RightArm
+local function GetRightArm()
+	return GetModel().RightArm
 end
 
-local function GET__left_leg()
-	return GET__model().LeftLeg
+local function GetLeftLeg()
+	return GetModel().LeftLeg
 end
 
-local function GET__right_leg()
-	return GET__model().RightLeg
+local function GetRightLeg()
+	return GetModel().RightLeg
 end
 
-local function GET__torso()
-	return GET__model().Torso
+local function GetTorso()
+	return GetModel().Torso
 end
 
-local function GET__head()
-	return GET__model().Head
+local function GetHead()
+	return GetModel().Head
 end
 
-local function GET__humanoid()
-	return GET__model().Humanoid
+local function GetHumanoid()
+	return GetModel().Humanoid
 end
 
-local function GET__health()
-	return GET__scripting_folder().Values.Health.Value
+local function GetHealth()
+	return GetScriptingFolder().Values.Health.Value
 end
 
-local function GET__damage_dealt()
-	return GET__scripting_folder().Values.DamageDealt.Value
+local function GetDamageDealt()
+	return GetScriptingFolder().Values.DamageDealt.Value
 end
 
-local function GET__damage_rate()
-	return GET__scripting_folder().Values.DamageRate.Value
+local function GetDamageRate()
+	return GetScriptingFolder().Values.DamageRate.Value
 end
 
-local function GET__zombie_type()
-	return GET__scripting_folder().Values.ZombieType.Value
+local function GetZombieType()
+	return GetScriptingFolder().Values.ZombieType.Value
 end
 
-local function GET__worth()
-	return GET__scripting_folder().Values.Worth.Value
+local function GetWorth()
+	return GetScriptingFolder().Values.Worth.Value
 end
 
-local function GET__is_zombie()
-	return GET__model().IsZombie.Value
+local function IsAZombie()
+	return GetModel():WaitForChild("Humanoid") and GetHumanoid() and GetHumanoid().IsZombie and GetHumanoid().IsZombie.Value
 end
 
-local function SET__activated(activated)
-	GET__scripting_folder().Values.Activated.Value = activated
+local function SetActivated(activated)
+	GetScriptingFolder().Values.Activated.Value = activated
 end
 
-local function SET__health(value)
-	GET__scripting_folder().Values.Health.Value = value
+local function SetHealth(value)
+	GetScriptingFolder().Values.Health.Value = value
 end
 
-local function SET__damage_dealt(damage)
-	GET__scripting_folder().Values.DamageDealt.Value = damage
+local function SetDamageDealt(damage)
+	GetScriptingFolder().Values.DamageDealt.Value = damage
 end
 
-local function SET__damage_rate(seconds)
-	GET__scripting_folder().Values.DamageRate.Value = seconds
+local function SetDamageRate(seconds)
+	GetScriptingFolder().Values.DamageRate.Value = seconds
 end
 
-local function SET__display_name(new_name)
-	GET__model().Humanoid.DisplayName = new_name
+local function SetDisplayName(new_name)
+	GetModel().Humanoid.DisplayName = new_name
 end
 
-local function SET__head_fire(enabled)
-	GET__model().Head.Fire.Enabled = enabled
+local function SetHeadFire(enabled)
+	GetModel().Head.Fire.Enabled = enabled
 end
 
-local function SET__face(asset_ID)
-	GET__model().Head.Decal.Texture = asset_ID
+local function SetFace(asset_ID)
+	GetModel().Head.Decal.Texture = asset_ID
 end
 
-local function SET__worth(worth)
-	GET__scripting_folder().Values.Worth.Value = worth
+local function SetWorth(worth)
+	GetScriptingFolder().Values.Worth.Value = worth
 end
 
 --[[
@@ -118,63 +118,62 @@ end
 ]]
 
 -- check if enough time has passed so that the zombie can deal damage
-local function CALCULATE__can_damage()
-	return os.time() - last_prickle > GET__damage_rate()
+local function ZombieCanDamage()
+	return os.time() - LastPrickle > GetDamageRate()
 end
 
 -- try to deal damage
-local function DO__prickle(partTouching)
+local function DoPrickle(partTouching)
 	local humanoid = partTouching.Parent:FindFirstChildWhichIsA("Humanoid")
 	
 	-- check if humanoid exists
-	if GET__activated() and humanoid and CALCULATE__can_damage() and humanoid:FindFirstChild("IsZombie") == nil then
+	if humanoid and IsZombieActivated() and not IsAZombie() and ZombieCanDamage() then
 		-- deal damage
-		humanoid.Health -= GET__damage_dealt()
+		humanoid.Health -= GetDamageDealt()
 		
 		-- reset timer
-		last_prickle = os.time()
+		LastPrickle = os.time()
 	end
 end
 
 -- do jeff damage
-local function DO__jeff_prickle(partTouching)
+local function DoJeffPrickle(partTouching)
 	local humanoid = partTouching.Parent:FindFirstChildWhichIsA("Humanoid")
-	local player = game:GetService("Players"):GetPlayerFromCharacter(partTouching.Parent)
 
 	-- check if humanoid exists
-	if GET__activated() and humanoid and CALCULATE__can_damage() and humanoid:FindFirstChild("IsZombie") == nil and GET__zombie_type() == "jeff" then
+	if humanoid and IsZombieActivated() and not IsAZombie() and ZombieCanDamage() and GetZombieType() == "Jeff" then
 		-- deal damage
-		humanoid.Health -= GET__damage_dealt()
+		humanoid.Health -= GetDamageDealt()
 
 		-- reset timer
-		last_prickle = os.time()
+		LastPrickle = os.time()
 		
 		-- jeff's power awakens
 		-- open guis
-		local player_gui = player:WaitForChild("PlayerGui")
-		local screen_gui = Instance.new("ScreenGui", player_gui)
-		local image_gui = Instance.new("ImageLabel", screen_gui)
-		local image_gui_2 = Instance.new("ImageLabel", screen_gui)
+		local playerGui = game:GetService("Players"):GetPlayerFromCharacter(partTouching.Parent):WaitForChild("PlayerGui")
+		local screenGui = Instance.new("ScreenGui", playerGui)
+		local imageGui = Instance.new("ImageLabel", screenGui)
+		local imageGui2 = Instance.new("ImageLabel", screenGui)
 		
 		-- setup first image
-		image_gui.Size = UDim2.new(1, 0, 1, 0)
-		image_gui.Position = UDim2.new(0, 0, 0, 0)
-		image_gui.Image = "rbxassetid://141447418"
-		image_gui.ImageTransparency = 0
-		image_gui.BackgroundTransparency = 1
+		imageGui.Size = UDim2.new(1, 0, 1, 0)
+		imageGui.Position = UDim2.new(0, 0, 0, 0)
+		imageGui.Image = "rbxassetid://141447418"
+		imageGui.ImageTransparency = 0
+		imageGui.BackgroundTransparency = 1
 		
 		-- play death sound
-		--sound_module.PLAY__sound("omaewa")
+		SoundModule.PlaySound_DefaultSettings("Omaewa")
 		
 		-- wait to display glowing eyes
-		wait(4)
+		task.wait(4)
 		
 		-- setup second image
-		image_gui_2.Size = UDim2.new(1, 0, 1, 0)
-		image_gui_2.Position = UDim2.new(0, 0, 0, 0)
-		image_gui_2.Image = "rbxassetid://368111294"
-		image_gui_2.ImageTransparency = 0
-		image_gui_2.BackgroundTransparency = 1
+		imageGui2.Size = UDim2.new(1, 0, 1, 0)
+		imageGui2.Position = UDim2.new(0, 0, 0, 0)
+		imageGui2.Image = "rbxassetid://368111294"
+		imageGui2.ImageTransparency = 0
+		imageGui2.BackgroundTransparency = 1
 		
 		-- kill player
 		humanoid.Health = 0
@@ -185,25 +184,25 @@ end
 	Take Damage
 ]]
 
-local function DO__death()
+local function DoDeath()
 	-- DEBUG
 	print("Zombie Died!")
 	
 	-- give money
-	player_module.GivePlayerMoney(GET__humanoid().WhoShot.Value, GET__worth())
+	PlayerModule.GivePlayerMoney(GetHumanoid().WhoShot.Value, GetWorth())
 	
 	-- deactivate zombie
-	SET__activated(false)
+	SetActivated(false)
 	
 	-- break joints
-	for index, joint in ipairs(GET__torso():GetJoints()) do
+	for index, joint in ipairs(GetTorso():GetJoints()) do
 		joint:Destroy()
 	end
 	
 	-- fade parts out
 	for transparency = 0, 1, 0.1 do
 		-- fade parts
-		for index, part in ipairs(GET__model():GetDescendants()) do
+		for index, part in ipairs(GetModel():GetDescendants()) do
 			-- check for part
 			if part:IsA("BasePart") then
 				-- fade
@@ -212,15 +211,15 @@ local function DO__death()
 		end
 		
 		-- wait
-		wait(0.2)
+		task.wait(0.2)
 	end
 	
 	-- disappear
-	GET__model():Destroy()
+	GetModel():Destroy()
 end
 
-local function CHECK__alive()
-	return (GET__health() > 0)
+local function IsZombieAlive()
+	return (GetHealth() > 0)
 end
 
 --[[
@@ -228,53 +227,51 @@ end
 ]]
 
 -- setup zombie clothing decoration
-local function CONFIGURE__change_cloths__zombie(shirtColor, pantsColor, skinColor)
+local function ConfigureZombieColors(shirtColor, pantsColor, skinColor)
 	-- setup part colors
-	GET__torso().Color = shirtColor
-	GET__head().Color = skinColor
-	GET__left_arm().Color = skinColor
-	GET__right_arm().Color = skinColor
-	GET__left_leg().Color = pantsColor
-	GET__right_leg().Color = pantsColor
+	GetTorso().Color = shirtColor
+	GetHead().Color = skinColor
+	GetLeftArm().Color = skinColor
+	GetRightArm().Color = skinColor
+	GetLeftLeg().Color = pantsColor
+	GetRightLeg().Color = pantsColor
 end
 
 -- setup head fire
-local function CONFIGURE__change_enabled__head_fire(enabled)
-	SET__head_fire(enabled)
+local function SetHeadFireDecoration(enabled)
+	SetHeadFire(enabled)
 end
 
 -- configure damage
-local function CONFIGURE__configure__damage(damage_dealt, damage_rate)
+local function ConfigureZombieDamage(damageDealt, damageRate)
 	-- setup damage
-	SET__damage_dealt(damage_dealt)
-	SET__damage_rate(damage_rate)
+	SetDamageDealt(damageDealt)
+	SetDamageRate(damageRate)
 end
 
 -- configure zombie
-function CONFIGURE__zombie(zombie_type)
-	-- get zombie_module
+local function ConfigureZombie(zombieType)
 	-- get options
-	local replicated_storage = game:GetService("ReplicatedStorage")
-	local zombie_module = require(game:GetService("ServerScriptService").GameCore.Monsters.Zombies.ZombieConfiguration)
-	local string_module = require(game:GetService("ServerScriptService").GameCore.Basic.Strings)
+	local ZombieModule = require(game:GetService("ServerScriptService").GameCore.Monsters.Zombies.ZombieConfiguration)
+	local StringModule = require(game:GetService("ServerScriptService").GameCore.Basic.Strings)
 	
 	-- configure damage
-	CONFIGURE__configure__damage(zombie_module.zombie_styles[zombie_type].damage.dealt, zombie_module.zombie_styles[zombie_type].damage.rate)
+	ConfigureZombieDamage(ZombieModule.ZombieStyles[zombieType].Damage.Dealt, ZombieModule.ZombieStyles[zombieType].Damage.Rate)
 	
 	-- configure health
-	SET__health(zombie_module.zombie_styles[zombie_type].max_health)
+	SetHealth(ZombieModule.ZombieStyles[zombieType].MaxHealth)
 	
 	-- dress zombie
-	CONFIGURE__change_cloths__zombie(zombie_module.zombie_styles[zombie_type].colors.shirt, zombie_module.zombie_styles[zombie_type].colors.pants, zombie_module.zombie_styles[zombie_type].colors.skin)
+	ConfigureZombieColors(ZombieModule.ZombieStyles[zombieType].Colors.Shirt, ZombieModule.ZombieStyles[zombieType].Colors.Pants, ZombieModule.ZombieStyles[zombieType].Colors.Skin)
 	
 	-- configure decoration
-	SET__display_name(zombie_module.zombie_styles[zombie_type].display_name)
-	GET__humanoid().NameDisplayDistance = 0
-	CONFIGURE__change_enabled__head_fire(string_module.list_has_string(zombie_module.zombie_styles[zombie_type].decoration, "fire"))
-	SET__face(zombie_module.zombie_styles[zombie_type].face)
+	SetDisplayName(ZombieModule.ZombieStyles[zombieType].DisplayName)
+	GetHumanoid().NameDisplayDistance = 0
+	SetHeadFireDecoration(StringModule.ListHasString(ZombieModule.ZombieStyles[zombieType].Decoration, "Fire"))
+	SetFace(ZombieModule.ZombieStyles[zombieType].Face)
 	
 	-- configure worth
-	SET__worth(zombie_module.zombie_styles[zombie_type].worth)
+	SetWorth(ZombieModule.ZombieStyles[zombieType].Worth)
 end
 
 --[[
@@ -282,44 +279,44 @@ end
 ]]
 
 -- zombie main
-local function RUN__zombie(zombie_type)
+local function RunZombie(zombieType)
 	-- setup humanoid variable
-	local humanoid = GET__humanoid()
+	local humanoid = GetHumanoid()
 
 	-- setup damage
-	GET__left_arm().Touched:Connect(DO__prickle)
-	GET__right_arm().Touched:Connect(DO__prickle)
-	GET__left_arm().Touched:Connect(DO__jeff_prickle)
-	GET__right_arm().Touched:Connect(DO__jeff_prickle)
+	GetLeftArm().Touched:Connect(DoPrickle)
+	GetRightArm().Touched:Connect(DoPrickle)
+	GetLeftArm().Touched:Connect(DoJeffPrickle)
+	GetRightArm().Touched:Connect(DoJeffPrickle)
 
 	-- configure zombie
-	CONFIGURE__zombie(zombie_type)
+	ConfigureZombie(zombieType)
 	
 	-- while zombie is alive
-	while CHECK__alive() == true do
+	while IsZombieAlive() == true do
 		-- stall while not active
-		while CHECK__alive() == true and GET__activated() == false do
+		while IsZombieAlive() == true and IsZombieActivated() == false do
 			-- wait
-			wait(5)
+			task.wait(5)
 		end
 		
 		-- make zombie walk
-		while CHECK__alive() == true and GET__activated() == true do
+		while IsZombieAlive() == true and IsZombieActivated() == true do
 			-- make zombie walk
-			local player_positions = player_module.GetPlayersByClosestToPoint(GET__torso().Position + Vector3.new(math.random(-10, 10), 0, math.random(-10, 10)))
-			humanoid:MoveTo(player_positions[1].position)
+			local playerPositions = PlayerModule.GetPlayersByClosestToPoint(GetTorso().Position + Vector3.new(math.random(-10, 10), 0, math.random(-10, 10)))
+			humanoid:MoveTo(playerPositions[1].position)
 			
 			-- sleep
-			wait(1)
+			task.wait(1)
 		end
 		
 		-- general wait
-		wait(0.5)
+		task.wait(0.5)
 	end
 	
 	-- zombie is dead
-	DO__death()
+	DoDeath()
 end
 
 -- run zombie
-RUN__zombie(GET__zombie_type())
+RunZombie(GetZombieType())
