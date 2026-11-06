@@ -190,7 +190,7 @@ local function DO__death()
 	print("Zombie Died!")
 	
 	-- give money
-	player_module.give_player_money(GET__humanoid().WhoShot.Value, GET__worth())
+	player_module.GivePlayerMoney(GET__humanoid().WhoShot.Value, GET__worth())
 	
 	-- deactivate zombie
 	SET__activated(false)
@@ -306,7 +306,7 @@ local function RUN__zombie(zombie_type)
 		-- make zombie walk
 		while CHECK__alive() == true and GET__activated() == true do
 			-- make zombie walk
-			local player_positions = player_module.get_players_by_closest_to_point(GET__torso().Position + Vector3.new(math.random(-10, 10), 0, math.random(-10, 10)))
+			local player_positions = player_module.GetPlayersByClosestToPoint(GET__torso().Position + Vector3.new(math.random(-10, 10), 0, math.random(-10, 10)))
 			humanoid:MoveTo(player_positions[1].position)
 			
 			-- sleep

@@ -19,12 +19,12 @@ local SpawningModule = require(ServerScriptService.GameCore.Monsters.SpawnMonste
 -- give all players starting tools
 local function GiveAllPlayersStartingTools(gunType, availableBulletCount)
 	-- get all player names
-	local playerNames = PlayersModule.get_all_player_names()
+	local playerNames = PlayersModule.GetAllPlayerNames()
 	
 	-- for each player
 	for i, playerName in pairs(playerNames) do
 		-- give starter gun
-		GivePlayerModule.give_player_specific_gun(playerName, gunType, availableBulletCount)
+		GivePlayerModule.GivePlayerSpecificGun(playerName, gunType, availableBulletCount)
 		
 		-- DEBUG
 		print("Gave '" .. playerName .. "' a starter weapon!")
@@ -61,7 +61,7 @@ local function RunGameOnMap(MaxRounds)
 			task.wait(1)
 
 			-- spawn zombie
-			SpawningModule.SPAWN__zombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
+			SpawningModule.SpawnZombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
 			roundManager.MarkZombieSpawned()
 		end
 

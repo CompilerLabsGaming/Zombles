@@ -1,22 +1,22 @@
-local module = {}
+local Module = {}
 
 --[[
 	Dependencies
 ]]
 
 -- module constants
-local replicated_storage = game:WaitForChild("ReplicatedStorage")
+local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
 local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
-local players_service = game:GetService("Players")
+local PlayersService = game:GetService("Players")
 
 --[[
 	Give Tool(s)
 ]]
 -- give a player a tool
-function module.give_player_tool(player_name, tool)
+function Module.GivePlayerTool(playerName, tool)
 	-- get player
-	local player = players_service:FindFirstChild(player_name)
+	local player = PlayersService:FindFirstChild(playerName)
 
 	-- if valid
 	if player then
@@ -26,17 +26,17 @@ function module.give_player_tool(player_name, tool)
 end
 
 -- give all players starting tools
-function module.GIVE__all_players_tool(tool)
+function Module.GiveAllPlayersAtool(tool)
 	-- get all player names
-	local player_names = PlayersModule.get_all_player_names()
+	local playerNames = PlayersModule.GetAllPlayerNames()
 
 	-- for each player
-	for i, player_name in pairs(player_names) do
+	for i, playerName in pairs(playerNames) do
 		-- give tool
-		module.give_player_tool(player_name, tool)
+		Module.GivePlayerTool(playerName, tool)
 
 		-- DEBUG
-		print("Gave '" .. player_name .. "' a starter weapon!")
+		print("Gave '" .. playerName .. "' a starter weapon!")
 	end
 end
 
@@ -45,16 +45,16 @@ end
 ]]
 
 -- give a player a specific gun
-function module.give_player_specific_gun(player_name, gun_type, available_bullet_count)
+function Module.GivePlayerSpecificGun(playerName, gunType, availableBulletCount)
 	-- create gun
-	local gun = replicated_storage.Weapons.LaserGun:Clone()
+	local gun = ReplicatedStorage.Weapons.LaserGun:Clone()
 
 	-- configure gun
-	gun.Scripting.Values.GunType.Value = gun_type
-	gun.Scripting.Values.BulletsInTotal.Value = available_bullet_count
+	gun.Scripting.Values.GunType.Value = gunType
+	gun.Scripting.Values.BulletsInTotal.Value = availableBulletCount
 
 	-- give gun
-	module.give_player_tool(player_name, gun)
+	Module.GivePlayerTool(playerName, gun)
 end
 
-return module
+return Module

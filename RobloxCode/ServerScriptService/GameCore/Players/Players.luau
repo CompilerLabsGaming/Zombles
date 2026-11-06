@@ -1,15 +1,15 @@
-local module = {}
+local Module = {}
 
 -- players service
-local players_service = game:GetService("Players")
+local PlayersService = game:GetService("Players")
 
 -- get list of all player name's
-function module.get_all_player_names()
+function Module.GetAllPlayerNames()
 	-- setup list
 	local list = {}
 	
 	-- for each player
-	for i, player in pairs(players_service:GetPlayers()) do
+	for i, player in pairs(PlayersService:GetPlayers()) do
 		-- get name and append it
 		table.insert(list, player.Character.Name)
 	end
@@ -18,25 +18,27 @@ function module.get_all_player_names()
 end
 
 -- get player from touch
-function module.get_player_from_touch(hit)
+function Module.GetPlayerFromTouch(hit)
 	-- get model
 	local character = hit.Parent
 	
 	-- check humanoid
 	if character and character:FindFirstChild("Humanoid") then
 		-- return humanoid or nil
-		return players_service:GetPlayerFromCharacter(character)
+		return PlayersService:GetPlayerFromCharacter(character)
 	end
+	
+	return nil
 end
 
 -- make a list of all players in order of closest to farthest
-function module.get_players_by_closest_to_point(point)
+function Module.GetPlayersByClosestToPoint(point)
 	-- setup output
 	local output = {}
 	
 	-- get all player distances
 	-- for each player
-	for i, player in pairs(players_service:GetPlayers()) do
+	for i, player in pairs(PlayersService:GetPlayers()) do
 		-- get the character
 		local character = player.Character
 		
@@ -62,7 +64,7 @@ function module.get_players_by_closest_to_point(point)
 end
 
 -- detect if a player (instead of a zombie) is touching a part
-function module.check_player_is_touching_part(main_part, humanoid_part)
+function Module.CheckPlayerIsTouchingPart(main_part, humanoid_part)
 	-- get data
 	local model = humanoid_part.Parent
 	local humanoid = model:FindFirstChild("Humanoid")
@@ -83,12 +85,12 @@ function module.check_player_is_touching_part(main_part, humanoid_part)
 end
 
 -- give player money
-function module.give_player_money(player_name, amount)
+function Module.GivePlayerMoney(playerName, amount)
 	-- get player
-	local player = players_service:FindFirstChild(player_name)
+	local player = PlayersService:FindFirstChild(playerName)
 	
 	-- DEBUG
-	print("Giving " .. player_name .. " $" .. amount .. "!")
+	print("Giving " .. playerName .. " $" .. amount .. "!")
 	
 	-- if valid
 	if player then
@@ -97,4 +99,4 @@ function module.give_player_money(player_name, amount)
 	end
 end
 
-return module
+return Module
