@@ -58,7 +58,7 @@ module.zombie_styles = {
 			pants = module.zombie_colors.noob_green,
 			shirt = module.zombie_colors.dark_blue,
 		},
-		face = module.zombie_faces.normal,
+		face = module.zombie_faces.rainbow,
 		decoration = {},
 		max_health = 10,
 		damage = {

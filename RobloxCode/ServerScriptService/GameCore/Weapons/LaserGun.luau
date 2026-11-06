@@ -100,88 +100,86 @@ function Module.BuildScripts.CreateGun_PhotonPistol(parent): Model
 	local materialPlastic = Enum.Material.Plastic
 	local materialNeon = Enum.Material.Neon
 
-	
-
 	-- build gun
-	output = Instance.new("Model", parent)
+	output = Instance.new("Model", workspace)
 	
 	return output
 end
 
 -- gun configurations
-Module.configurations = {
-	photon_pistol = {
-		appearance = {
-			name = "Photon Pistol",
-			power_color = Module.Colors.PowerCyan,
-			parts = {
-				{ part_name = "PowerMeter", part_shape = Enum.PartType.Block, material = Enum.Material.Neon, positional_offset = Vector3.new(0, 0.33, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.2, 0.25, 1.75), color = Module.Colors.PowerCyan },
-				{ part_name = "Barrel", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.75, 0.75, 2.25), color = Module.Colors.BarrelBlack },
-				{ part_name = "Scope", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0.4, -0.8), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.25, 0.4, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "Stock", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, -0.5, 0.75), rotation = Vector3.new(math.rad(75), 0, 0), size = Vector3.new(0.7, 0.8, 0.5), color = Module.Colors.BarrelBlack }
+Module.Configurations = {
+	PhotonPistol = {
+		Appearance = {
+			Name = "Photon Pistol",
+			PowerColor = Module.Colors.PowerCyan,
+			Parts = {
+				{ PartName = "PowerMeter", PartShape = Enum.PartType.Block, Material = Enum.Material.Neon, PositionalOffset = Vector3.new(0, 0.33, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.2, 0.25, 1.75), Color = Module.Colors.PowerCyan },
+				{ PartName = "Barrel", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.75, 0.75, 2.25), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Scope", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0.4, -0.8), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.25, 0.4, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Stock", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, -0.5, 0.75), Rotation = Vector3.new(math.rad(75), 0, 0), Size = Vector3.new(0.7, 0.8, 0.5), Color = Module.Colors.BarrelBlack }
 			}
 		},
-		firing = {
-			damage_dealt = 25,
-			shot_rate = 0.2,
-			shots_per_clip = 10,
-			reload_time = 1.0,
-			firing_sound = "laser_rifle_shoot",
-			reload_sound = "long_laser_reload"
+		Firing = {
+			DamageDealt = 25,
+			ShotRate = 0.2,
+			ShotsPerClip = 10,
+			ReloadTime = 1.0,
+			FiringSound = "LaserRifleShoot",
+			ReloadSound = "LongLaserReload"
 		}
 	},
-	plasma_rifle = {
-		appearance = {
-			name = "Plasma Rifle",
-			power_color = Module.Colors.PowerPurple,
-			parts = {
-				{ part_name = "PowerMeter", part_shape = Enum.PartType.Block, material = Enum.Material.Neon, positional_offset = Vector3.new(0, 0.33, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.2, 0.25, 2.25), color = Module.Colors.PowerPurple },
-				{ part_name = "Barrel", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.75, 0.75, 3), color = Module.Colors.BarrelBlack },
-				{ part_name = "Scope", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0.4, -1), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.25, 0.4, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "Stock", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, -0.5, 1), rotation = Vector3.new(math.rad(75), 0, 0), size = Vector3.new(0.7, 0.8, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "Clip", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, -0.5, -0.75), rotation = Vector3.new(math.rad(345), 0, 0), size = Vector3.new(0.7, 1, 0.5), color = Module.Colors.BarrelBlack }
+	PlasmaRifle = {
+		Appearance = {
+			Name = "Plasma Rifle",
+			PowerColor = Module.Colors.PowerPurple,
+			Parts = {
+				{ PartName = "PowerMeter", PartShape = Enum.PartType.Block, Material = Enum.Material.Neon, PositionalOffset = Vector3.new(0, 0.33, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.2, 0.25, 2.25), Color = Module.Colors.PowerPurple },
+				{ PartName = "Barrel", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.75, 0.75, 3), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Scope", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0.4, -1), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.25, 0.4, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Stock", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, -0.5, 1), Rotation = Vector3.new(math.rad(75), 0, 0), Size = Vector3.new(0.7, 0.8, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Clip", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, -0.5, -0.75), Rotation = Vector3.new(math.rad(345), 0, 0), Size = Vector3.new(0.7, 1, 0.5), Color = Module.Colors.BarrelBlack }
 			}
 		},
-		firing = {
-			damage_dealt = 200,
-			shot_rate = 0.05,
-			shots_per_clip = 50,
-			reload_time = 3.0,
-			firing_sound = "laser_rifle_shoot",
-			reload_sound = "long_laser_reload"
+		Firing = {
+			DamageDealt = 200,
+			ShotRate = 0.05,
+			ShotsPerClip = 50,
+			ReloadTime = 3.0,
+			FiringSound = "LaserRifleShoot",
+			ReloadSound = "LongLaserReload"
 		}
 	},
-	aetherbolt = {
-		appearance = {
-			name = "Aether Bolt",
-			power_color = Module.Colors.PowerYellow,
-			parts = {
-				{ part_name = "PowerMeter", part_shape = Enum.PartType.Block, material = Enum.Material.Neon, positional_offset = Vector3.new(0, 0.33, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.2, 0.25, 2.25), color = Module.Colors.PowerYellow },
-				{ part_name = "Barrel", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0, 0), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.75, 0.75, 3), color = Module.Colors.BarrelBlack },
-				{ part_name = "Scope", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, 0.4, -1), rotation = Vector3.new(0, 0, 0), size = Vector3.new(0.25, 0.4, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "Stock", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, -0.5, 1), rotation = Vector3.new(math.rad(75), 0, 0), size = Vector3.new(0.7, 0.8, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "Clip", part_shape = Enum.PartType.Block, material = Enum.Material.Plastic, positional_offset = Vector3.new(0, -0.5, -0.75), rotation = Vector3.new(math.rad(345), 0, 0), size = Vector3.new(0.7, 1, 0.5), color = Module.Colors.BarrelBlack },
-				{ part_name = "SparePower", part_shape = Enum.PartType.Block, material = Enum.Material.Neon, positional_offset = Vector3.new(0, -0.5, -0.6), rotation = Vector3.new(math.rad(345), 0, 0), size = Vector3.new(0.5, 0.9, 0.5), color = Module.Colors.PowerYellow }
+	AetherBolt = {
+		Appearance = {
+			Name = "Aether Bolt",
+			PowerColor = Module.Colors.PowerYellow,
+			Parts = {
+				{ PartName = "PowerMeter", PartShape = Enum.PartType.Block, Material = Enum.Material.Neon, PositionalOffset = Vector3.new(0, 0.33, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.2, 0.25, 2.25), Color = Module.Colors.PowerYellow },
+				{ PartName = "Barrel", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0, 0), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.75, 0.75, 3), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Scope", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, 0.4, -1), Rotation = Vector3.new(0, 0, 0), Size = Vector3.new(0.25, 0.4, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Stock", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, -0.5, 1), Rotation = Vector3.new(math.rad(75), 0, 0), Size = Vector3.new(0.7, 0.8, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "Clip", PartShape = Enum.PartType.Block, Material = Enum.Material.Plastic, PositionalOffset = Vector3.new(0, -0.5, -0.75), Rotation = Vector3.new(math.rad(345), 0, 0), Size = Vector3.new(0.7, 1, 0.5), Color = Module.Colors.BarrelBlack },
+				{ PartName = "SparePower", PartShape = Enum.PartType.Block, Material = Enum.Material.Neon, PositionalOffset = Vector3.new(0, -0.5, -0.6), Rotation = Vector3.new(math.rad(345), 0, 0), Size = Vector3.new(0.5, 0.9, 0.5), Color = Module.Colors.PowerYellow }
 			}
 		},
-		firing = {
-			damage_dealt = 200,
-			shot_rate = 0.05,
-			shots_per_clip = 50,
-			reload_time = 3.0,
-			firing_sound = "laser_rifle_shoot",
-			reload_sound = "long_laser_reload"
+		Firing = {
+			DamageDealt = 200,
+			ShotRate = 0.05,
+			ShotsPerClip = 50,
+			ReloadTime = 3.0,
+			FiringSound = "LaserRifleShoot",
+			ReloadSound = "LongLaserReload"
 		}
 	}
 }
 
 -- get a list of all possible gun types
-function Module.get_gun_type_list()
+function Module.GetGunTypeList()
 	-- setup output
 	local output = {}
 	
 	-- for each member
-	for name, member in pairs(Module.configurations) do
+	for name, member in pairs(Module.Configurations) do
 		-- insert member
 		table.insert(output, name)
 	end

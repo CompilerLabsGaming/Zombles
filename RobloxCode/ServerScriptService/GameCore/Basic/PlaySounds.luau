@@ -2,23 +2,23 @@ local Module = {}
 
 -- SoundIDs
 Module.SoundIDs = {
-	default = "5279459236",
-	pew = "5958405572",
-	laser_rifle_shoot = "9060205449",
-	short_laser_reload = "9060040486",
-	long_laser_reload = "9058751039",
-	gunshot = "6862108495",
-	empty_clip = "132464034",
-	gun_reload = "138084889",
-	oof = "17755696142",
-	beep = "762117042",
-	alarm = "418308086",
-	omaewa = "1255922819",
-	song__frozen_glow = "114853109003442"
+	Default = "5279459236",
+	Pew = "5958405572",
+	LaserRifleShoot = "9060205449",
+	ShortLaserReload = "9060040486",
+	LongLaserReload = "9058751039",
+	GunShot = "6862108495",
+	EmptyClip = "132464034",
+	GunReload = "138084889",
+	Oof = "17755696142",
+	Beep = "762117042",
+	Alarm = "418308086",
+	Omaewa = "1255922819",
+	Song_FrozenGlow = "114853109003442"
 }
 
 -- global sound volume modifier
-Module.VALUE__master_volume = 0.5
+Module.MasterVolume = 0.5
 export type VolumeControls = {
 	MasterVolume: number
 }
@@ -31,22 +31,24 @@ export type LoadedSound = {
 }
 
 -- load all sounds
-function Module.LOAD__sounds()
+function Module.LoadAllSounds()
 	-- load sounds
 	for name, asset_ID in pairs(Module.SoundIDs) do
 		-- create sound variable
-		local sound: LoadedSound = {}
+		local sound: LoadedSound = nil
 
 		-- setup sound properies
 		sound.SoundInstance = Instance.new("Sound", game.SoundService)
-		sound.AssetID = Module.CALCULATE__sound_asset_ID_string(asset_ID)
+		sound.AssetID = Module.CreateSoundAssetIDString(asset_ID)
 		sound.Name = name
 		sound.SoundInstance.Name = name
+
+		-- create sound asset
 	end
 end
 
 -- calculate roblox asset ID string
-function Module.CALCULATE__sound_asset_ID_string(asset_ID: string): string
+function Module.CreateSoundAssetIDString(asset_ID: string): string
 	return "rbxassetid://" .. asset_ID
 end
 
@@ -57,12 +59,12 @@ function Module.GET__sound_asset_ID(searching_for: string): string
 		-- check for name
 		if name == searching_for then
 			-- match
-			return Module.CALCULATE__sound_asset_ID_string(Module.SoundIDs[name])
+			return Module.CreateSoundAssetIDString(Module.SoundIDs[name])
 		end
 	end
 
 	-- sound not found
-	return Module.CALCULATE__sound_asset_ID_string(Module.SoundIDs["default"])
+	return Module.CreateSoundAssetIDString(Module.SoundIDs["default"])
 end
 
 -- play any sound
@@ -83,7 +85,7 @@ function Module.PLAY__sound(name: string, volume: number, pace: number, has_audi
 	end
 
 	-- configure sound
-	desired_sound.Volume = volume * Module.VALUE__master_volume
+	desired_sound.Volume = volume * Module.MasterVolume
 	desired_sound.PlaybackSpeed = pace
 
 	-- play sound

@@ -6,28 +6,28 @@
 	File Scoped Variables
 ]]
 
-local replicated_storage = game:WaitForChild("ReplicatedStorage")
+local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
-local players_module = require(ServerScriptService.GameCore.Players.Players)
-local give_player_module = require(ServerScriptService.GameCore.Players.GivePlayer)
-local spawning_module = require(ServerScriptService.GameCore.Monsters.SpawnMonsters)
+local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
+local GivePlayerModule = require(ServerScriptService.GameCore.Players.GivePlayer)
+local SpawningModule = require(ServerScriptService.GameCore.Monsters.SpawnMonsters)
 
 --[[
 	Equip Players
 ]]
 
 -- give all players starting tools
-local function GIVE__all_players_starting_tools(gun_type, available_bullet_count)
+local function GiveAllPlayersStartingTools(gunType, availableBulletCount)
 	-- get all player names
-	local player_names = players_module.get_all_player_names()
+	local playerNames = PlayersModule.get_all_player_names()
 	
 	-- for each player
-	for i, player_name in pairs(player_names) do
+	for i, playerName in pairs(playerNames) do
 		-- give starter gun
-		give_player_module.give_player_specific_gun(player_name, gun_type, available_bullet_count)
+		GivePlayerModule.give_player_specific_gun(playerName, gunType, availableBulletCount)
 		
 		-- DEBUG
-		print("Gave '" .. player_name .. "' a starter weapon!")
+		print("Gave '" .. playerName .. "' a starter weapon!")
 	end
 end
 
@@ -35,41 +35,13 @@ end
 	Run Game
 ]]
 
---[[-- run one round
-local function RUN__Round(RoundID)
-	-- player passed round
-	print("Starting Round #" .. tostring(RoundID) .. ".")
-	
-	-- calculate zombie count
-	Game = RoundID * 4
-	
-	-- spawn zombies
-	while NeededZombieCount > 0 do
-		-- spawn zombie
-		spawning_module.SPAWN__zombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
-		
-		-- next zombie
-		NeededZombieCount -= 1
-		task.wait(1)
-	end
-	
-	-- wait for all of them to be killed
-	while #game.Workspace.Monsters:GetChildren() > 0 do
-		-- delay
-		task.wait(5)
-	end
-	
-	-- player passed round
-	print("Congratulations! You Passed Round #" .. tostring(RoundID) .. "!")
-end]]
-
 -- run the whole game
-local function RUN__Game__SpecificMap(MaxRounds)
+local function RunGameOnMap(MaxRounds)
 	-- create round manager
 	local roundManager = require(ServerScriptService.GameCore.Rounds.RoundManager:Clone())
 
 	-- give each player the starter weapon
-	GIVE__all_players_starting_tools("plasma_rifle", 1000000)
+	GiveAllPlayersStartingTools("PlasmaRifle", 1000000)
 	
 	-- wait to start rounds
 	task.wait(5)
@@ -89,13 +61,13 @@ local function RUN__Game__SpecificMap(MaxRounds)
 			task.wait(1)
 
 			-- spawn zombie
-			spawning_module.SPAWN__zombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
+			SpawningModule.SPAWN__zombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
 			roundManager.MarkZombieSpawned()
 		end
 
 		-- wait for all zombies to be defeated
 		while roundManager.WaitForNextRound() do
-			-- wait for all monsters to die
+			-- wait to check for all monsters being dead
 			task.wait(5)
 		end
 	
@@ -109,13 +81,13 @@ local function RUN__Game__SpecificMap(MaxRounds)
 end
 
 -- run game
-local function RUN__game()
+local function RunGame()
 	-- setup damage remote events
-	replicated_storage.GameCore.RemoteEvents.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
+	ReplicatedStorage.GameCore.RemoteEvents.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
 		-- do damage
 		health_slot.Value -= expected_damage
 	end)
-	replicated_storage.GameCore.RemoteEvents.TagHumanoid.OnServerEvent:Connect(function(player, humanoid, name)
+	ReplicatedStorage.GameCore.RemoteEvents.TagHumanoid.OnServerEvent:Connect(function(player, humanoid, name)
 		humanoid:FindFirstChild("WhoShot").Value = name
 	end)
 	
@@ -128,7 +100,7 @@ local function RUN__game()
 	--sound_module.PLAY__sound("song__frozen_glow")
 
 	-- build map
-	RUN__Game__SpecificMap(4)
+	RunGameOnMap(4)
 end
 
 --[[
@@ -139,4 +111,4 @@ end
 task.wait(3)
 
 -- run game
-RUN__game()
+RunGame()
