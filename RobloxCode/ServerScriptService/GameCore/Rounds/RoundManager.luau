@@ -3,51 +3,51 @@
 ]]
 
 -- module
-local RoundManager = {}
+local Module = {}
 
 -- start game
-function RoundManager.StartGame(maxRoundID)
-    RoundManager.CurrentRoundID = 1
-    RoundManager.MaximumRoundID = maxRoundID
-    RoundManager.CurrentMonsterCount = 0
-    RoundManager.MonstersLeftToSpawn = 0
-    RoundManager.MonsterMultiplier = 4
+function Module.StartGame(maxRoundID)
+    Module.CurrentRoundID = 1
+    Module.MaximumRoundID = maxRoundID
+    Module.CurrentMonsterCount = 0
+    Module.MonstersLeftToSpawn = 0
+    Module.MonsterMultiplier = 4
 end
 
 -- next round triggered
-function RoundManager.WaitForNextRound(): boolean
-    return RoundManager.CurrentMonsterCount > 0
+function Module.WaitForNextRound(): boolean
+    return Module.CurrentMonsterCount > 0
 end
 
 -- start round
-function RoundManager.StartRound()
-    RoundManager.CurrentMonsterCount = 0
-    RoundManager.MonstersLeftToSpawn = RoundManager.CurrentRoundID * RoundManager.MonsterMultiplier
+function Module.StartRound()
+    Module.CurrentMonsterCount = 0
+    Module.MonstersLeftToSpawn = Module.CurrentRoundID * Module.MonsterMultiplier
 end
 
 -- spawn monster
-function RoundManager.MarkZombieSpawned()
-    RoundManager.CurrentMonsterCount += 1
-    RoundManager.MonstersLeftToSpawn -= 1
+function Module.MarkZombieSpawned()
+    Module.CurrentMonsterCount += 1
+    Module.MonstersLeftToSpawn -= 1
 end
 
 -- next round
-function RoundManager.NextRound()
-    RoundManager.CurrentRoundID += 1;
+function Module.NextRound()
+    Module.CurrentRoundID += 1;
 end
 
 -- game is running
-function RoundManager.RunningRounds(): boolean
-    return RoundManager.CurrentRoundID > 0 and RoundManager.CurrentRoundID <= RoundManager.MaximumRoundID
+function Module.RunningRounds(): boolean
+    return Module.CurrentRoundID > 0 and Module.CurrentRoundID <= Module.MaximumRoundID
 end
 
 -- end game
-function RoundManager.EndGame()
-    RoundManager.RoundID = 0
+function Module.EndGame()
+    Module.RoundID = 0
 end
 
-function RoundManager.GetCurrentZombieType(): string
+function Module.GetCurrentZombieType(): string
     return "Ash"
 end
 
-return RoundManager
+return Module

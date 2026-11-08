@@ -110,7 +110,15 @@
               "pluginManaged": true,
               "children": [
                 {
-                  "name": "Zombies",
+                  "name": "MonsterManager",
+                  "className": "ModuleScript",
+                  "pluginManaged": true,
+                  "filePaths": [
+                    "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Monsters/MonsterManager.luau"
+                  ]
+                },
+                {
+                  "name": "Configurations",
                   "className": "Folder",
                   "pluginManaged": true,
                   "children": [
@@ -119,58 +127,7 @@
                       "className": "ModuleScript",
                       "pluginManaged": true,
                       "filePaths": [
-                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Monsters/Zombies/ZombieConfiguration.luau"
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "SpawnMonsters",
-                  "className": "ModuleScript",
-                  "pluginManaged": true,
-                  "filePaths": [
-                    "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Monsters/SpawnMonsters.luau"
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "ReplicatedStorage",
-      "className": "ReplicatedStorage",
-      "pluginManaged": true,
-      "children": [
-        {
-          "name": "Monsters",
-          "className": "Folder",
-          "pluginManaged": true,
-          "children": [
-            {
-              "name": "Zombie",
-              "className": "Model",
-              "pluginManaged": true,
-              "children": [
-                {
-                  "name": "Scripting",
-                  "className": "Folder",
-                  "pluginManaged": true,
-                  "children": [
-                    {
-                      "name": "Scripts",
-                      "className": "Folder",
-                      "pluginManaged": true,
-                      "children": [
-                        {
-                          "name": "Zombie",
-                          "className": "Script",
-                          "pluginManaged": true,
-                          "filePaths": [
-                            "d:/CodingProjects/Zombles/RobloxCode/Scripts/Zombie.legacy.luau"
-                          ]
-                        }
+                        "d:/CodingProjects/Zombles/RobloxCode/ServerScriptService/GameCore/Monsters/Configurations/ZombieConfiguration.luau"
                       ]
                     }
                   ]

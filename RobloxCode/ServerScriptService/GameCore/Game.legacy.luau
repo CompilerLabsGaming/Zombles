@@ -11,7 +11,7 @@ local ServerScriptService = game:WaitForChild("ServerScriptService")
 local SoundModule = require(ServerScriptService.GameCore.Basic.PlaySounds)
 local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
 local GivePlayerModule = require(ServerScriptService.GameCore.Players.GivePlayer)
-local SpawningModule = require(ServerScriptService.GameCore.Monsters.SpawnMonsters)
+local MonstersModule = require(ServerScriptService.GameCore.Monsters.MonsterManager)
 
 --[[
 	Equip Players
@@ -62,7 +62,7 @@ local function RunGameOnMap(MaxRounds)
 			task.wait(1)
 
 			-- spawn zombie
-			SpawningModule.SpawnZombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
+			MonstersModule.SpawnZombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
 			roundManager.MarkZombieSpawned()
 		end
 
@@ -87,22 +87,14 @@ local function RunGame()
 	SoundModule.LoadAllSounds()
 
 	-- setup damage remote events
-	ReplicatedStorage.GameCore.RemoteEvents.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
+	ReplicatedStorage.GameCore.Remotes.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
 		-- do damage
 		health_slot.Value -= expected_damage
 	end)
-	ReplicatedStorage.GameCore.RemoteEvents.TagHumanoid.OnServerEvent:Connect(function(player, humanoid, name)
+	ReplicatedStorage.GameCore.Remotes.TagHumanoid.OnServerEvent:Connect(function(player, humanoid, name)
 		humanoid:FindFirstChild("WhoShot").Value = name
 	end)
 	
-	-- create remote event that 
-	
-	-- create collision groups for zombie doors
-	
-	-- setup atmosphere
-	--game:WaitForChild("Lighting").FogEnd = 1000
-	--sound_module.PLAY__sound("song__frozen_glow")
-
 	-- build map
 	RunGameOnMap(4)
 end

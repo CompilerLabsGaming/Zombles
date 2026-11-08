@@ -187,4 +187,6 @@ function Module.GetGunTypeList()
 	return output
 end
 
+-- do server side logic for laser gun
+
 return Module

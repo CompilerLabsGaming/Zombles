@@ -5,7 +5,7 @@ local Module = {}
 ]]
 
 -- module constants
-local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
+local ServerStorage = game:WaitForChild("ServerStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
 local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
 local PlayersService = game:GetService("Players")
@@ -47,7 +47,7 @@ end
 -- give a player a specific gun
 function Module.GivePlayerSpecificGun(playerName, gunType, availableBulletCount)
 	-- create gun
-	local gun = ReplicatedStorage.Weapons.LaserGun:Clone()
+	local gun = ServerStorage.Weapons.LaserGun:Clone()
 
 	-- configure gun
 	gun.Scripting.Values.GunType.Value = gunType
