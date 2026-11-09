@@ -72,12 +72,12 @@ end
 
 -- create left arm
 local function CreateLeftArm(parent, color, position)
-    CreateAppendage(parent, "LeftArm", color, false, position + Vector3.new(1.5, -1.5, 1.5), Vector3.new(90, 0, 0))
+    CreateAppendage(parent, "LeftArm", color, false, position + Vector3.new(1.5, -1.5, -1.5), Vector3.new(-90, 0, 0))
 end
 
 -- create right arm
 local function CreateRightArm(parent, color, position)
-    CreateAppendage(parent, "RightArm", color, false, position + Vector3.new(-1.5, -1.5, 1.5), Vector3.new(90, 0, 0))
+    CreateAppendage(parent, "RightArm", color, false, position + Vector3.new(-1.5, -1.5, -1.5), Vector3.new(-90, 0, 0))
 end
 
 -- create motor6D joint
@@ -104,7 +104,7 @@ local function AddHeadMesh(parent, partName)
 end
 
 -- create head
-local function CreateHead(parent, color, position, face)
+local function CreateHead(parent, color, position, faceAssetID)
     -- create block
     local size = Vector3.new(2, 1, 1)
     local pivotOffset = CFrame.new(size.X / 2, size.Y / 2, size.Z / 2)
@@ -112,6 +112,12 @@ local function CreateHead(parent, color, position, face)
 
     -- add mesh
     AddHeadMesh(head, "HeadMesh")
+
+    -- add face
+    local faceDecal = Instance.new("Decal", head)
+    faceDecal.Name = "FaceDecal"
+    faceDecal.Face = Enum.NormalId.Front
+    faceDecal.Texture = faceAssetID
 end
 
 -- create zombie
@@ -126,7 +132,7 @@ local function BuildZombie(typeName, shirtColor, pantsColor, skinColor)
     CreateRightLeg(model, pantsColor, model.Torso.CFrame.Position)
     CreateLeftArm(model, skinColor, model.Torso.CFrame.Position)
     CreateRightArm(model, skinColor, model.Torso.CFrame.Position)
-    CreateHead(model, skinColor, model.Torso.CFrame.Position, nil)
+    CreateHead(model, skinColor, model.Torso.CFrame.Position, "rbxassetid://" .. tostring(7157327144))
 
     -- create joints
     CreateJoint(model, model.Torso, model.LeftLeg, CFrame.new())
