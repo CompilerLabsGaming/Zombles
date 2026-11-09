@@ -51,6 +51,9 @@ local function RunGame(MaxRounds)
 	-- set round count & init values
 	roundManager.StartGame(2)
 
+	-- DEBUG
+	--MonstersModule.Debug_SpawnAllZombieTypes(Workspace.SpawnBrick.CFrame)
+
 	-- run rounds
 	while roundManager.RunningRounds() do
 		-- run round

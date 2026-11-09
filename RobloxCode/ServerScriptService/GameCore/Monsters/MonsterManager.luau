@@ -121,7 +121,7 @@ local function CreateHead(parent, color, position, faceAssetID)
 end
 
 -- create zombie
-local function BuildZombie(typeName, shirtColor, pantsColor, skinColor)
+local function BuildZombie(typeName, shirtColor, pantsColor, skinColor, face)
     -- create model
     local model = Instance.new("Model", MonsterStorageLocation)
     model.Name = typeName
@@ -132,7 +132,7 @@ local function BuildZombie(typeName, shirtColor, pantsColor, skinColor)
     CreateRightLeg(model, pantsColor, model.Torso.CFrame.Position)
     CreateLeftArm(model, skinColor, model.Torso.CFrame.Position)
     CreateRightArm(model, skinColor, model.Torso.CFrame.Position)
-    CreateHead(model, skinColor, model.Torso.CFrame.Position, "rbxassetid://" .. tostring(7157327144))
+    CreateHead(model, skinColor, model.Torso.CFrame.Position, face)
 
     -- create joints
     CreateJoint(model, model.Torso, model.LeftLeg, CFrame.new())
@@ -140,6 +140,10 @@ local function BuildZombie(typeName, shirtColor, pantsColor, skinColor)
     CreateJoint(model, model.Torso, model.LeftArm, CFrame.new())
     CreateJoint(model, model.Torso, model.RightArm, CFrame.new())
     CreateJoint(model, model.Torso, model.Head, CFrame.new())
+
+    -- create humanoid
+    local humanoid = Instance.new("Humanoid", model)
+    humanoid.DisplayName = typeName
 
     -- return model
     return model
@@ -150,8 +154,12 @@ local function GenerateStoredMonsters()
     -- create monster database
     Module.Monsters = {}
 
-    -- create null zombie
-    table.insert(Module.Monsters, BuildZombie("Noob", Color3.fromRGB(0, 0, 255), Color3.fromRGB(0, 255, 0), Color3.fromRGB(255, 255, 0)))
+    -- create default face
+    local defaultFace = "rbxassetid://" .. tostring(7157327144)
+
+    -- create zombies
+    table.insert(Module.Monsters, BuildZombie("NULL", Color3.fromRGB(0, 0, 0), Color3.fromRGB(0, 0, 0), Color3.fromRGB(0, 0, 0), defaultFace))
+    table.insert(Module.Monsters, BuildZombie("Noob", Color3.fromRGB(0, 0, 255), Color3.fromRGB(0, 255, 0), Color3.fromRGB(255, 255, 0), defaultFace))
 end
 
 --[[
@@ -167,6 +175,13 @@ function Module.SpawnZombie(torsoPosition, zombieType)
 	
 	-- return handle
 	return zombie
+end
+
+-- spawn all unique zombie types
+function Module.Debug_SpawnAllZombieTypes(torsoPosition)
+    for index, zombie in pairs(Module.Monsters) do
+        Module.SpawnZombie(torsoPosition, zombie.Name)
+    end
 end
 
 --[[
