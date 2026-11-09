@@ -6,6 +6,7 @@
 	File Scoped Variables
 ]]
 
+local Workspace = game:WaitForChild("Workspace")
 local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
 local SoundModule = require(ServerScriptService.GameCore.Basic.PlaySounds)
@@ -37,7 +38,7 @@ end
 ]]
 
 -- run the whole game
-local function RunGameOnMap(MaxRounds)
+local function RunGame(MaxRounds)
 	-- create round manager
 	local roundManager = require(ServerScriptService.GameCore.Rounds.RoundManager:Clone())
 
@@ -62,7 +63,7 @@ local function RunGameOnMap(MaxRounds)
 			task.wait(1)
 
 			-- spawn zombie
-			MonstersModule.SpawnZombie(game:GetService("Workspace").SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
+			MonstersModule.SpawnZombie(Workspace.SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
 			roundManager.MarkZombieSpawned()
 		end
 
@@ -81,10 +82,13 @@ local function RunGameOnMap(MaxRounds)
 	print("Congratulations! You beat all rounds! Thanks for playing!")
 end
 
--- run game
-local function RunGame()
+-- kickstart game
+local function KickstartGame()
 	-- load all sounds
 	SoundModule.LoadAllSounds()
+
+	-- load all monsters
+	MonstersModule.StartMonsterManager()
 
 	-- setup damage remote events
 	ReplicatedStorage.GameCore.Remotes.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)
@@ -95,8 +99,8 @@ local function RunGame()
 		humanoid:FindFirstChild("WhoShot").Value = name
 	end)
 	
-	-- build map
-	RunGameOnMap(4)
+	-- run game
+	RunGame(4)
 end
 
 --[[
@@ -107,4 +111,4 @@ end
 task.wait(3)
 
 -- run game
-RunGame()
+KickstartGame()

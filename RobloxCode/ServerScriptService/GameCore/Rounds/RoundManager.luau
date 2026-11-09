@@ -11,7 +11,7 @@ function Module.StartGame(maxRoundID)
     Module.MaximumRoundID = maxRoundID
     Module.CurrentMonsterCount = 0
     Module.MonstersLeftToSpawn = 0
-    Module.MonsterMultiplier = 4
+    Module.MonsterMultiplier = 1
 end
 
 -- next round triggered
@@ -47,7 +47,7 @@ function Module.EndGame()
 end
 
 function Module.GetCurrentZombieType(): string
-    return "Ash"
+    return "Noob"
 end
 
 return Module
