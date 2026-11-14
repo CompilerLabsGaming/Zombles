@@ -6,7 +6,7 @@
 	Globals
 ]]
 
-local GLOBAL__player_service = game:GetService("Players")
+local PlayerService = game:GetService("Players")
 
 --[[
 	Player Joined Game
@@ -29,4 +29,4 @@ local function PLAYER__joined(player)
 end
 
 -- set leaderstats to be added when players join
-GLOBAL__player_service.PlayerAdded:Connect(PLAYER__joined)
+PlayerService.PlayerAdded:Connect(PLAYER__joined)

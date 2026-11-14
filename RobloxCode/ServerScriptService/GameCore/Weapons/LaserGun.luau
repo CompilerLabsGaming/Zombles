@@ -22,90 +22,6 @@ Module.Colors = {
 	PowerYellow = Color3.fromRGB(255, 248, 34)
 }
 
--- gun configuration structures
-export type GunPart = {
-	partCategory: string, -- power meter, barrel, clip, scope, etc
-	partName: string,
-	partShape: Enum.PartType,
-	material: Enum.Material,
-	positionalOffset: Vector3,
-	rotation: Vector3,
-	size: Vector3,
-	color: Color3
-}
-export type GunAppearance = {
-	displayName: string,
-	powerColor: Color3,
-	parts: { GunPart }
-}
-export type GunStats = {
-	damageDealt: number,
-	shotRate: number,
-	shotsPerClip: number,
-	reloadTime: number,
-	firingSound: string,
-	reloadSound: string
-}
-export type GunConfiguration = {
-	internalName: string,
-	appearance: GunAppearance,
-	stats: GunStats
-}
-
--- gun configuration scripts
-Module.BuildScripts = {}
-function Module.BuildScripts.Pack_GunPart(partName: string, partShape: Enum.PartType, material: Enum.Material, positionalOffset: Vector3, rotation: Vector3, size: Vector3, color: Color3): GunPart
-	local output: GunPart = nil
-	
-	-- setup values
-	output.partName = partName
-	output.partShape = partShape
-	output.material = material
-	output.positionalOffset = positionalOffset
-	output.rotation = rotation
-	output.size = size
-	output.color = color
-	
-	return output
-end
-function Module.BuildScripts.Pack_GunAppearance(displayName: string, powerColor: Color3, ...: GunPart): GunAppearance
-	local output: GunAppearance = nil
-	
-	-- setup values
-	output.displayName = displayName
-	output.powerColor = powerColor
-	output.parts = {}
-	for index, part in { ... } do
-		table.insert(output.parts, part)
-	end
-	
-	return output
-end
-function Module.BuildScripts.Pack_GunConfiguration(internalName: string, appearance: GunAppearance, stats: GunStats): GunConfiguration
-	local output: GunConfiguration = nil
-
-	-- setup values
-	output.internalName = internalName
-	output.appearance = appearance
-	output.stats = stats
-
-	return output
-end
-function Module.BuildScripts.CreateGun_PhotonPistol(parent): Model
-	local output: Model = nil
-	
-	-- setup looks
-	local gunColor = Module.Colors.BarrelBlack
-	local plasmaColor = Module.Colors.PowerBlue
-	local materialPlastic = Enum.Material.Plastic
-	local materialNeon = Enum.Material.Neon
-
-	-- build gun
-	output = Instance.new("Model", workspace)
-	
-	return output
-end
-
 -- gun configurations
 Module.Configurations = {
 	PhotonPistol = {
@@ -186,7 +102,5 @@ function Module.GetGunTypeList()
 	
 	return output
 end
-
--- do server side logic for laser gun
 
 return Module

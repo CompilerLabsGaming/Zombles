@@ -11,8 +11,8 @@ local ReplicatedStorage = game:WaitForChild("ReplicatedStorage")
 local ServerScriptService = game:WaitForChild("ServerScriptService")
 local SoundModule = require(ServerScriptService.GameCore.Basic.PlaySounds)
 local PlayersModule = require(ServerScriptService.GameCore.Players.Players)
-local GivePlayerModule = require(ServerScriptService.GameCore.Players.GivePlayer)
 local MonstersModule = require(ServerScriptService.GameCore.Monsters.MonsterManager)
+local WeaponsManagerModule = require(ServerScriptService.GameCore.Weapons.WeaponsManager)
 
 --[[
 	Equip Players
@@ -26,7 +26,7 @@ local function GiveAllPlayersStartingTools(gunType, availableBulletCount)
 	-- for each player
 	for i, playerName in pairs(playerNames) do
 		-- give starter gun
-		GivePlayerModule.GivePlayerSpecificGun(playerName, gunType, availableBulletCount)
+		WeaponsManagerModule.GiveWeapon(playerName, "The_Eddison_MKI")
 		
 		-- DEBUG
 		print("Gave '" .. playerName .. "' a starter weapon!")
@@ -66,7 +66,7 @@ local function RunGame(MaxRounds)
 			task.wait(1)
 
 			-- spawn zombie
-			MonstersModule.SpawnZombie(Workspace.SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
+			MonstersModule.SpawnMonster(Workspace.SpawnBrick.CFrame, roundManager.GetCurrentZombieType())
 			roundManager.MarkZombieSpawned()
 		end
 
@@ -92,6 +92,9 @@ local function KickstartGame()
 
 	-- load all monsters
 	MonstersModule.StartMonsterManager()
+
+	-- load all weapons
+	WeaponsManagerModule.GenerateAllWeapons()
 
 	-- setup damage remote events
 	ReplicatedStorage.GameCore.Remotes.ShotFiredAtZombie.OnServerEvent:Connect(function(player, health_slot, expected_damage)

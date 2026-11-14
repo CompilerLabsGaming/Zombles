@@ -3,6 +3,11 @@ local Module = {}
 -- players service
 local PlayersService = game:GetService("Players")
 
+-- get player ny name
+function Module.GetPlayerByName(playerName)
+	return PlayersService:FindFirstChild(playerName)
+end
+
 -- get list of all player name's
 function Module.GetAllPlayerNames()
 	-- setup list
@@ -84,10 +89,37 @@ function Module.CheckPlayerIsTouchingPart(main_part, humanoid_part)
 	end
 end
 
+-- give a player a tool
+function Module.GivePlayerTool(playerName, tool)
+	-- get player
+	local player = Module.GetPlayerByName(playerName)
+
+	-- if valid
+	if player then
+		-- give tool
+		tool.Parent = player.Backpack
+	end
+end
+
+-- give all players starting tools
+function Module.GiveAllPlayersATool(tool)
+	-- get all player names
+	local playerNames = Module.GetAllPlayerNames()
+
+	-- for each player
+	for i, playerName in pairs(playerNames) do
+		-- give tool
+		Module.GivePlayerTool(playerName, tool)
+
+		-- DEBUG
+		print("Gave '" .. playerName .. "' a tool!")
+	end
+end
+
 -- give player money
 function Module.GivePlayerMoney(playerName, amount)
 	-- get player
-	local player = PlayersService:FindFirstChild(playerName)
+	local player = Module.GetPlayerByName(playerName)
 	
 	-- DEBUG
 	print("Giving " .. playerName .. " $" .. amount .. "!")
