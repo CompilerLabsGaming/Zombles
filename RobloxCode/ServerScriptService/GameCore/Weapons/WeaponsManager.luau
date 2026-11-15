@@ -30,18 +30,18 @@ end
 
 -- build barrel
 local function BuildGunBarrel(parent, length, pivotOffset, color)
-    return InstantiationModule.CreatePart(parent, "Barrel", Enum.PartType.Capsule, Enum.Material.Plastic, false, Vector3.new(0, 0, 0), pivotOffset, Vector3.new(-90, 0, 0), Vector3.new(0.25, 0.25, length), color)
+    return InstantiationModule.CreatePart(parent, "Barrel", Enum.PartType.Cylinder, Enum.Material.Plastic, false, Vector3.new(0, 0, 0), pivotOffset, Vector3.new(0, -90, 0), Vector3.new(length, 0.25, 0.25), color)
 end
 
 --[[
     Build Gun Models
 ]]
 
--- build electric avenger
-local function BuildGun_TheEddisonMK1(parent)
+-- build the edison 20watt
+local function BuildGun_TheEdison20W(parent)
     -- create model
     local output = Instance.new("Tool", parent)
-    output.Name = "The_Eddison_MKI"
+    output.Name = "The Edison 20W"
 
     -- build gun parts
     local robloxHandle = BuildRobloxHandle(output)
@@ -56,7 +56,7 @@ end
 --[[
     Plasma Gun
     -- gun damage is measured in watts
-    -- tiers are (MKI, MKII, MKIII, etc)
+    -- tiers are also by wattage
     -- coolant affects how fast the gun can fire, but also it's shots before it needs to cool off
 ]]
 
@@ -92,7 +92,7 @@ end
 -- start weapons manager
 function Module.GenerateAllWeapons()
     -- build all weapons
-    table.insert(Module.StoredWeapons, BuildGun_TheEddisonMK1(ServerStorage.Weapons))
+    table.insert(Module.StoredWeapons, BuildGun_TheEdison20W(ServerStorage.Weapons))
 end
 
 -- clone a specific weapon

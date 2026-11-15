@@ -152,6 +152,28 @@
           ]
         }
       ]
+    },
+    {
+      "name": "StarterPlayer",
+      "className": "StarterPlayer",
+      "pluginManaged": true,
+      "children": [
+        {
+          "name": "StarterPlayerScripts",
+          "className": "StarterPlayerScripts",
+          "pluginManaged": true,
+          "children": [
+            {
+              "name": "Sprint",
+              "className": "LocalScript",
+              "pluginManaged": true,
+              "filePaths": [
+                "d:/CodingProjects/Zombles/RobloxCode/StarterPlayerScripts/StarterPlayerScripts/Sprint.local.luau"
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

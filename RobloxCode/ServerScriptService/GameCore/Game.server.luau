@@ -26,7 +26,7 @@ local function GiveAllPlayersStartingTools(gunType, availableBulletCount)
 	-- for each player
 	for i, playerName in pairs(playerNames) do
 		-- give starter gun
-		WeaponsManagerModule.GiveWeapon(playerName, "The_Eddison_MKI")
+		WeaponsManagerModule.GiveWeapon(playerName, "The Edison 20W")
 		
 		-- DEBUG
 		print("Gave '" .. playerName .. "' a starter weapon!")
