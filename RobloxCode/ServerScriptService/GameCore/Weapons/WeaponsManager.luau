@@ -30,7 +30,8 @@ end
 
 -- build barrel
 local function BuildGunBarrel(parent, length, pivotOffset, color)
-    return InstantiationModule.CreatePart(parent, "Barrel", Enum.PartType.Cylinder, Enum.Material.Plastic, false, Vector3.new(0, 0, 0), pivotOffset, Vector3.new(0, -90, 0), Vector3.new(length, 0.25, 0.25), color)
+    local diameter = 0.75
+    return InstantiationModule.CreatePart(parent, "Barrel", Enum.PartType.Cylinder, Enum.Material.Plastic, false, Vector3.new(0, 0, 0), pivotOffset, Vector3.new(0, -90, 0), Vector3.new(length, diameter, diameter), color)
 end
 
 --[[
@@ -59,7 +60,7 @@ end
     -- tiers are also by wattage
     -- coolant affects how fast the gun can fire, but also it's shots before it needs to cool off
 ]]
-
+--[[
 -- calculate tier modifier
 function Module.CalculatePlasmaGunTierModifier(tier)
     return 1.0 + (tier * 0.05)
@@ -83,7 +84,7 @@ end
 -- create plasma gun instance
 function Module.OpenNewPlasmaGun(watts, tier, coolant, battery, plasmaColor)
     return
-end
+end]]
 
 --[[
     Game Wide Weapons Management
