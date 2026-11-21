@@ -40,9 +40,11 @@ end
 
 -- build the edison 20watt
 local function BuildGun_TheEdison20W(parent)
-    -- create model
+    -- create tool instance
     local output = Instance.new("Tool", parent)
     output.Name = "The Edison 20W"
+    output.CanBeDropped = false
+    output.RequiresHandle = true
 
     -- build gun parts
     local robloxHandle = BuildRobloxHandle(output)
